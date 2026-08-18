@@ -3,95 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEELMTA - Bejelentkezés</title>
+    <title>SEEL - GAME - SYSTEM | Bejelentkezés</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1a0033 0%, #0d001a 100%);
+            background: linear-gradient(135deg, #0d001a 0%, #1a0033 50%, #050505 100%);
             background-attachment: fixed;
             color: #ffffff;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
 
-        /* Felső sáv (Fejléc) */
-        .top-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            box-sizing: border-box;
+        /* Prémium kártya dizájn */
+        .login-card {
+            background: rgba(15, 15, 18, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 40px 35px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(16, 185, 129, 0.1);
+            width: 380px;
+            text-align: center;
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
-        .top-left {
+        /* Egyedi SVG hatszögletű logó stílus */
+        .logo-box {
+            margin-bottom: 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
         }
-        .top-left img {
-            width: 35px;
-            height: auto;
+
+        .hexagon-logo {
+            width: 65px;
+            height: 75px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+            margin-bottom: 12px;
         }
-        .top-left span {
+
+        .hexagon-inner {
+            width: 59px;
+            height: 69px;
+            background: #121216;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: #10b981;
-            font-size: 20px;
+            font-size: 32px;
             font-weight: bold;
         }
 
-        .top-right a {
-            background-color: rgba(255, 255, 255, 0.1);
+        /* SEEL-GAME-SYSTEM felirat stílus */
+        .brand-title {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
             color: #ffffff;
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 14px;
-            transition: background 0.3s;
-            border: 1px solid #444;
-        }
-        .top-right a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            margin-top: 5px;
         }
 
-        /* Sötét stílusú bejelentkező kártya */
-        .login-card {
-            background-color: rgba(18, 18, 18, 0.9);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.9);
-            width: 350px;
-            text-align: center;
-            border: 1px solid #333;
+        .brand-title span {
+            color: #10b981;
         }
 
-        .logo-container {
-            margin-bottom: 25px;
-        }
-
-        .logo-container img {
-            width: 70px;
-            height: auto;
-            display: block;
-            margin: 0 auto 10px auto;
-        }
-
-        .logo-container h2 {
-            margin: 0 0 5px 0;
+        .login-card h2 {
+            margin: 15px 0 25px 0;
             color: #ffffff;
-            font-size: 22px;
-        }
-
-        .logo-container p {
-            margin: 0;
-            color: #888;
-            font-size: 13px;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .input-group {
@@ -102,8 +92,10 @@
         .input-group label {
             display: block;
             margin-bottom: 8px;
-            font-size: 13px;
-            color: #aaa;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #9ca3af;
         }
 
         .input-wrapper {
@@ -114,18 +106,20 @@
 
         .input-wrapper input {
             width: 100%;
-            padding: 12px 12px 12px 40px;
-            border: 1px solid #444;
-            background-color: #212121;
+            padding: 12px 12px 12px 42px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(25, 25, 32, 0.8);
             color: #fff;
-            border-radius: 6px;
+            border-radius: 8px;
             box-sizing: border-box;
             font-size: 14px;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
         }
 
         .input-wrapper input:focus {
             border-color: #10b981;
+            background-color: rgba(30, 30, 40, 1);
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
             outline: none;
         }
 
@@ -133,90 +127,84 @@
         .input-wrapper::before {
             content: "";
             position: absolute;
-            left: 12px;
+            left: 14px;
             width: 16px;
             height: 16px;
             background-size: contain;
             background-repeat: no-repeat;
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
         .input-group:nth-child(1) .input-wrapper::before {
-            /* Felhasználó ikon */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E");
         }
 
         .input-group:nth-child(2) .input-wrapper::before {
-            /* Jelszó ikon */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981'%3E%3Cpath d='M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z'/%3E%3C/svg%3E");
         }
 
         .checkbox-group {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 13px;
-            color: #ccc;
+            color: #d1d5db;
         }
 
         .checkbox-group input {
             margin-right: 8px;
             accent-color: #10b981;
             cursor: pointer;
+            width: 16px;
+            height: 16px;
         }
 
         .login-btn {
             width: 100%;
-            padding: 12px;
+            padding: 13px;
             background: linear-gradient(135deg, #059669 0%, #10b981 100%);
             border: none;
             color: white;
-            font-weight: bold;
-            border-radius: 6px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: opacity 0.3s;
-            font-size: 14px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
 
         .login-btn:hover {
-            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+            opacity: 0.95;
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="top-left">
-            <img src="logo.png" alt="Logo">
-            <span>SEELMTA</span>
-        </div>
-        <div class="top-right">
-            <a href="index.html">Vissza fő oldalra</a>
-        </div>
-    </div>
-
     <div class="login-card">
-        <div class="logo-container">
-            <img src="logo.png" alt="SEELMTA Logo">
-            <h2>Bejelentkezés</h2>
-            <p>Add meg az adataid, melyekkel InGame regisztráltál.</p>
+        <div class="logo-box">
+            <div class="hexagon-logo">
+                <div class="hexagon-inner">S</div>
+            </div>
+            <div class="brand-title">SEEL-<span>GAME-SYSTEM</span></div>
         </div>
+
+        <h2>Bejelentkezés</h2>
 
         <form id="loginForm" onsubmit="handleLogin(event)">
             <div class="input-group">
                 <label for="username">Felhasználónév</label>
                 <div class="input-wrapper">
-                    <input type="text" id="username" required>
+                    <input type="text" id="username" placeholder="Add meg a neved" required>
                 </div>
             </div>
 
             <div class="input-group">
                 <label for="password">Jelszó</label>
                 <div class="input-wrapper">
-                    <input type="password" id="password" required>
+                    <input type="password" id="password" placeholder="••••••••" required>
                 </div>
             </div>
 
